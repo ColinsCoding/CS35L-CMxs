@@ -1,5 +1,3 @@
-// Row.js
-
 import React from 'react';
 import Pixel from './Pixel';
 import { makeStyles } from '@material-ui/core/styles';
