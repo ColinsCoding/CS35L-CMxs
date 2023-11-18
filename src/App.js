@@ -1,13 +1,17 @@
-import Editor from './components/Editor';
+import React from 'react';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Editor from './Editor';
+import DrawingPanel from './DrawingPanel';
 
-//import './styles/App.scss';
-
-function App() {
+function App () {
   return (
-    <div className="App">
-      <Editor />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Editor} />
+        <Route path="/" component={DrawingPanel} />
+      </Switch>
+    </Router>
   );
 }
 
-export default App;
+export default App; 
