@@ -1,12 +1,13 @@
-import Editor from './components/Editor';
-
-//import './styles/App.scss';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Editor, Login, DrawingPanel } from "./components";
 
 function App() {
   return (
-    <div className="App">
-      <Editor />
-    </div>
+    <Routes>
+      <Route path="/*" element={<Editor />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   );
 }
 
