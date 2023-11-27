@@ -9,9 +9,10 @@ import '../styles/drawingPanel.css';
 
 
 function DrawingPanel({ width, height, selectedColor }) {
-  const createPost = (user, likes, image) => {
+  const createPost = (user, user_id, likes, image) => {
     const post_data = {
       user,
+      user_id,
       likes,
       image
     };
@@ -55,7 +56,7 @@ function DrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            createPost("placeholder_user", 0, data)
+            createPost("placeholder_user", "placeholder_id", 0, data)
           }}
       > POST TO WALL
       </button>
