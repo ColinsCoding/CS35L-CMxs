@@ -7,22 +7,22 @@ const router = express.Router();
 router.post('/', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
-            (!request.body.likes && request.body.likes !== 0) ||
-            !request.body.image
+            !request.body.user_id || !request.body.image
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
             });
         }
         const newPost = {
-            user: request.body.user,
             user_id: request.body.user_id,
-            likes: request.body.likes,
+            likes: request.body.likes || 0, //default to 0 if not provided
             image: request.body.image,
         };
 
-        const post = await Post.create(newPost);
+        const post = await newPost.save();
+
+        //Linking the post with the user
+        await User.findByIdAndUpdate(request.body.user_id, { $push: { posts: post._id } });
 
         return response.status(201).send(post)
     } catch (error) {
@@ -65,9 +65,7 @@ router.get('/:id', async (request, response) => {
 router.put('/:id', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
-            (!request.body.likes && request.body.likes !== 0) ||
-            !request.body.image
+            !request.body.user_id || !request.body.image
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
@@ -76,7 +74,12 @@ router.put('/:id', async (request, response) => {
 
         const { id } = request.params;
 
-        const result = await Post.findByIdAndUpdate(id, request.body);
+        //Updateing the post
+        const result = await Post.findByIdAndUpdate(id, {
+            user_id: request.body.user_id,
+            image: request.body.image,
+            likes: request.body.likes || 0, // Default to 0 if not provided
+        }, { new: true });
 
         if (!result) {
             return response.status(404).json({ message: 'Post not found' });
