@@ -6,10 +6,10 @@ const userInfo = mongoose.Schema(
             type: String,
             require: true,
         },
-        posts: {
-            type: Array,
-            required: true,
-        }
+        posts: [{
+            type: mongoose.Schema.Types.ObjectID,
+            red: 'Post', //should match the name given to the Post model
+        }],
     },
     {
         timestamps: true,
