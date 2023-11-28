@@ -4,7 +4,7 @@ import { User } from '../models/user.js';
 
 const router = express.Router();
 
-router.post('/', async (request, response) => {
+router.post('/posts', async (request, response) => {
     try {
         if (
             !request.body.user || !request.body.user_id ||
@@ -32,7 +32,7 @@ router.post('/', async (request, response) => {
 });
 
 // Get all posts
-router.get('/', async (request, response) => {
+router.get('/posts', async (request, response) => {
     try {
         const posts = await Post.find({});
 
@@ -47,7 +47,7 @@ router.get('/', async (request, response) => {
 });
 
 // Get one post 
-router.get('/:id', async (request, response) => {
+router.get('/posts/:id', async (request, response) => {
     try {
 
         const { id } = request.params;
@@ -62,7 +62,7 @@ router.get('/:id', async (request, response) => {
 });
 
 // Update a post
-router.put('/:id', async (request, response) => {
+router.put('/posts/:id', async (request, response) => {
     try {
         if (
             !request.body.user || !request.body.user_id ||
@@ -90,7 +90,7 @@ router.put('/:id', async (request, response) => {
     }
 });
 
-router.delete('/:id', async (request, response) => {
+router.delete('/posts/:id', async (request, response) => {
     try {
         const { id } = request.params;
         const result = await Post.findByIdAndDelete(id);
@@ -110,7 +110,8 @@ router.delete('/:id', async (request, response) => {
 router.post('/user', async (request, response) => {
     try {
         if (
-            !request.body.username ||
+            !request.body.username || 
+            !request.body.password ||
             !request.body.posts
         ) {
             return response.status(400).send({
@@ -119,6 +120,7 @@ router.post('/user', async (request, response) => {
         }
         const newUser = {
             username: request.body.username,
+            password: request.body.password,
             posts: request.body.posts,
         };
 
@@ -131,7 +133,7 @@ router.post('/user', async (request, response) => {
     }
 });
 
-// Get all posts
+// Get all users
 router.get('/user', async (request, response) => {
     try {
         const users = await User.find({});
@@ -146,7 +148,7 @@ router.get('/user', async (request, response) => {
     }
 });
 
-// Get one post 
+// Get one user 
 router.get('/user/:id', async (request, response) => {
     try {
 
@@ -161,11 +163,12 @@ router.get('/user/:id', async (request, response) => {
     }
 });
 
-// Update a post
+// Update a user
 router.put('/user/:id', async (request, response) => {
     try {
         if (
-            !request.body.username ||
+            !request.body.username || 
+            !request.body.password ||
             !request.body.posts
         ) {
             return response.status(400).send({
@@ -199,6 +202,20 @@ router.delete('/user/:id', async (request, response) => {
         }
 
         return response.status(200).send({ message: 'User deleted successfully' });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+// Obtain all posts by a user
+router.get('/user/posts/:username', async (request, response) => {
+    try {
+
+        const { username } = request.params;
+
+        const posts = await Post.find({user: username});
+        return response.status(200).json(posts);
     } catch (error) {
         console.log(error.message);
         response.status(500).send({ message: error.message });

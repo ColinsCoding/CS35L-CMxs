@@ -56,7 +56,7 @@ function DrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            createPost("placeholder_user", "placeholder_id", 0, data)
+            createPost("johnsons", "placeholder_id", 0, data)
           }}
       > POST TO WALL
       </button>

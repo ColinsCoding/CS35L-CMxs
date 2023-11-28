@@ -6,6 +6,10 @@ const userInfo = mongoose.Schema(
             type: String,
             require: true,
         },
+        password: {
+            type: String,
+            required: true,
+        },
         posts: {
             type: Array,
             required: true,
