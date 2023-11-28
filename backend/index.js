@@ -1,21 +1,27 @@
-import express, { response } from "express";
-import { PORT, mongoDBURL } from "./config.js";
-import mongoose from "mongoose";
-import postsRoute from './routes/routes.js';
-import cors from 'cors';
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const keys = require('./config/keys');
+const users = require('./routes/auth');
 
 const app = express();
-app.use(express.json())
-app.use(cors());
-app.use('/posts', postsRoute);
 
-mongoose.connect(mongoDBURL)
-    .then(() => {
-        console.log("Connected to database")
-        app.listen(PORT, () => {
-            console.log(`App is listening to port: ${PORT}`);
-        });
-    })
-    .catch(() => {
-        console.log(error)
-    });
+// Bodyparser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+// Passport middleware
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
+// Routes
+app.use('/api/users', users);
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`Server running on port ${port}`));

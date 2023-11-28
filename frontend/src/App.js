@@ -1,12 +1,16 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Editor from './components/Editor';
-
-//import './styles/App.scss';
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
-      <Editor />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Editor />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,3 +1,5 @@
+// Wall.js
+
 import React, { useState } from 'react';
 import DrawingPanel from './DrawingPanel';
 import Editor from './components/Editor';

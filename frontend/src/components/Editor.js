@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
 import DrawingPanel from './DrawingPanel';
+import { Link } from 'react-router-dom';
 
 import '../styles/editor.css';
 
@@ -9,7 +10,6 @@ function Editor() {
   const [canvasHeight, setCanvasHeight] = useState(16);
   const [hideOptions, setHideOptions] = useState(false);
   const [hideDrawingCanvas, setHideDrawingCanvas] = useState(true);
-  //const [buttonText, setButtonText] = useState('Start drawing');
   const [selectedColor, setSelectedColor] = useState('#f44336');
 
   const widthHandler = (e) => {
@@ -37,28 +37,30 @@ function Editor() {
   return (
     <div id="editor">
       <h1>Pixel Art Editor</h1>
+      <Link to="/login" style={{ position: 'absolute', top: '10px', right: '20px' }}>Login/Sign Up</Link>
       {hideDrawingCanvas && <h2>Enter Your Canvas Dimensions</h2>}
       {hideDrawingCanvas && (
-      <div id="options">
-        <div className='option'>
-          <input 
-            type='number' 
-            className='panelInput' 
-            defaultValue={canvasWidth} 
-            onChange={widthHandler}
-          />
-          <span>Width</span>
+        <div id="options">
+          <div className='option'>
+            <input 
+              type='number' 
+              className='panelInput' 
+              defaultValue={canvasWidth} 
+              onChange={widthHandler}
+            />
+            <span>Width</span>
+          </div>
+          <div className='option'>
+            <input 
+              type='number' 
+              className='panelInput' 
+              defaultValue={canvasHeight} 
+              onChange={heightHandler}
+            />
+            <span>Height</span>
+          </div>
         </div>
-        <div className='option'>
-          <input 
-            type='number' 
-            className='panelInput' 
-            defaultValue={canvasHeight} 
-            onChange={heightHandler}
-          />
-          <span>Height</span>
-        </div>
-      </div> )}
+      )}
 
       {hideDrawingCanvas && (
         <button 
@@ -68,8 +70,6 @@ function Editor() {
         </button>
       )}
 
-
-
       {hideOptions && (
         <>
           <button 
@@ -77,7 +77,6 @@ function Editor() {
             onClick={handleGoBack}
           > Go back home
           </button>
-
 
           <CirclePicker 
             color={selectedColor} 
@@ -91,9 +90,8 @@ function Editor() {
           />  
         </>
       )}
-
     </div> 
-  )
+  );
 }
 
 export default Editor;

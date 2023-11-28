@@ -1,3 +1,5 @@
+// DrawingPanel.js
+
 import React, { useRef, useState } from 'react';
 import Row from './Row';
 import { exportComponentAsPNG, exportComponentAsJPEG } from 'react-component-export-image';

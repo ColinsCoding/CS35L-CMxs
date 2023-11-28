@@ -1,3 +1,5 @@
+// Row.js
+
 import React from 'react';
 import Pixel from './Pixel';
 import '../styles/row.css';

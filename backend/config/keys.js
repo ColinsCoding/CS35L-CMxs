@@ -1,0 +1,5 @@
+module.exports = {
+    mongoURI: 'mongodb+srv://user0:user0@cluster0.texb5ag.mongodb.net/?retryWrites=true&w=majority',
+    secretOrKey: 'testing'
+  };
+  
