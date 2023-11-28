@@ -6,13 +6,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+### `node index.js`
+Run this once you are cd'd into backend, this will start the backend and the mongo server.
+Then you can cd to the front end and then run:
 
-Runs the app in the development mode.\
+### `npm start`
+Runs the front endapp in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+---
 
 ### `npm test`
 
