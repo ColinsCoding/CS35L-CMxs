@@ -1,3 +1,5 @@
+// frontend/src/components/Editor.js
+
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
 import DrawingPanel from './DrawingPanel';

@@ -1,4 +1,4 @@
-// DrawingPanel.js
+// // frontend/src/components/DrawingPanel.js
 
 import React, { useRef, useState } from 'react';
 import Row from './Row';

@@ -1,4 +1,4 @@
-// Pixel.js
+// frontend/src/components/Pixel.js
 
 import React, { useState } from 'react';
 import '../styles/pixel.css';

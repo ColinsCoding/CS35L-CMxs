@@ -1,4 +1,4 @@
-// Row.js
+// frontend/src/components/Row.js
 
 import React from 'react';
 import Pixel from './Pixel';
