@@ -10,6 +10,10 @@ function Login() {
   const [signupPassword, setSignupPassword] = useState('');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  
+  const [signupMessage, setSignupMessage] = useState('');
+
+  const [loginMessage, setLoginMessage] = useState('');
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -21,12 +25,31 @@ function Login() {
         },
         body: JSON.stringify({ email: signupEmail, username: signupUsername, password: signupPassword })
       });
+      
       const data = await response.json();
-      console.log(data); // Handle the response data as needed (e.g., display success message)
-    } catch (error) {
-      console.error('Sign up failed:', error);
+      console.log(data);
+
+      if (response.ok) {
+      console.log(data);
+      setSignupMessage('Sign up successful');
+      setTimeout(() => {
+        setSignupMessage('');
+      }, 10000);
+    } else {
+      setSignupMessage(data.message || 'Sign up failed');
+      setTimeout(() => {
+        setSignupMessage('');
+      }, 10000);
     }
-  };
+  } catch (error) {
+    console.error('Sign up failed:', error);
+    setSignupMessage('Sign up failed');
+    setTimeout(() => {
+      setSignupMessage('');
+    }, 10000);
+  }
+};
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,10 +61,27 @@ function Login() {
         },
         body: JSON.stringify({ email: loginEmail, password: loginPassword })
       });
+      
       const data = await response.json();
-      console.log(data); // Handle the response data as needed (e.g., redirect on successful login)
+      console.log(data);
+      
+      if (response.ok) {
+        setLoginMessage('Login successful');
+        setTimeout(() => {
+          setLoginMessage('');
+        }, 10000);
+      } else {
+        setLoginMessage(data.message || 'Login failed');
+        setTimeout(() => {
+          setLoginMessage('');
+        }, 10000);
+      }
     } catch (error) {
       console.error('Login failed:', error);
+      setLoginMessage('Login failed');
+      setTimeout(() => {
+        setLoginMessage('');
+      }, 10000);
     }
   };
 
@@ -49,6 +89,14 @@ function Login() {
     <div>
       <h1>Sign Up or Login</h1>
       <hr />
+      <div className="message-container">
+      {signupMessage && (
+        <span className="bubble signup-bubble">{signupMessage}</span>
+      )}
+      {loginMessage && (
+            <span className="bubble login-bubble">{loginMessage}</span>
+          )}
+    </div>
       <div id="konten">
         <Link to="/" style={{ position: 'absolute', top: '10px', left: '20px' }}>Back</Link>
         <div className="signup">
@@ -78,7 +126,7 @@ function Login() {
               onChange={(e) => setSignupPassword(e.target.value)}
               required
             />
-            <input type="submit" value="Register" />
+            <input type="submit" value="Sign Up" />
           </form>
         </div>
         <div className="login">

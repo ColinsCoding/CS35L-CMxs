@@ -38,4 +38,34 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
   }
+    
+  .message-container {
+    position: relative;
+    margin-bottom: 20px; /* Adjust as needed */
+  }
   
+  .signup-bubble {
+    position: absolute;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    top: 5px; /* Adjust position as needed */
+    left: 40%; /* Adjust position as needed */
+    transform: translateX(-50%);
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out;
+    opacity: .85;
+  }
+  
+  .login-bubble {
+    position: absolute;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    top: 5px; /* Adjust position as needed */
+    left: 60%; /* Adjust position as needed */
+    transform: translateX(-50%);
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out;
+    opacity: .85;
+  }
