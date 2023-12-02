@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PostsPage from './PostsPage';
-
+import Navbar from './Navbar';
 const UserPage = () => {
     const [posts, setPosts] = useState([]);
     const { user } = useParams();
@@ -19,7 +19,14 @@ const UserPage = () => {
     
     return (
     <div>
-        <h1 className='text-2xl'>Posts by {user}</h1>
+      <Navbar />
+      <br></br>
+        <h1 className='text-3xl text-center'>Information about {user}</h1>
+        <h3 className='text-2xl text-center'>Likes accumulated: <b>{"likes"}</b></h3>
+        <h3 className='text-2xl text-center'>Removals accumulated: <b>{"removals"}</b></h3>
+        <h3 className='text-2xl text-center'>Reputation: <b>{"rep"}</b></h3>
+        <br></br> <br></br>
+        <h1 className='text-3xl text-center'>Posts by {user}</h1>
         <PostsPage posts={posts} />
     </div>
     )

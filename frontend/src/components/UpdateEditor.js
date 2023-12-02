@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
-import DrawingPanel from './DrawingPanel';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import DrawingPanel from './UpdateDrawingPanel';
 import Navbar from './Navbar.js'
 
 import '../styles/editor.css';
 
-// Used to create an entirely new post
-function Editor() {
+// Used to draw over another user's posts
+function UpdateEditor() {
   const [canvasWidth, setCanvasWidth] = useState(16);
   const [canvasHeight, setCanvasHeight] = useState(16);
   const [hideOptions, setHideOptions] = useState(false);
@@ -35,12 +37,27 @@ function Editor() {
     setHideOptions(false);
     setHideDrawingCanvas(true);
   };
+  const [user, setUser] = useState('');
+  const [image, setImage] = useState('');
+  const {id} = useParams();
+  const navigate = useNavigate();
+  axios.get(`http://localhost:5555/posts/${id}`)
+  .then((response) => {
+    if (!response){
+        throw new Error("Post id does not exist!");
+    }
+    setUser(response.data.user);
+    setImage(response.data.image);
+  }).catch((error) => {
+    alert("Post does not exist!")
+    navigate("/feed")
+  });
 
   return (
     <div>
       <Navbar/>
       <div id="editor">
-        <h1>Pixel Art Editor</h1>
+        <h1>Editing: <b>{user}</b>'s Post</h1>
         {hideDrawingCanvas && <h2>Enter Your Canvas Dimensions</h2>}
         {hideDrawingCanvas && (
         <div id="options">
@@ -101,4 +118,4 @@ function Editor() {
   )
 }
 
-export default Editor;
+export default UpdateEditor;

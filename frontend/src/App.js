@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Editor, Login, DrawingPanel } from "./components";
 import MainPage from './components/MainPage';
 import UserPage from "./components/UserPage";
+import UpdateEditor from "./components/UpdateEditor";
+import PostDetails from "./components/PostDetails";
 
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/feed" element={<MainPage />} />
       <Route path="/user/:user" element={<UserPage />} />
+      <Route path="/edit/:id" element={<UpdateEditor />} />
+      <Route path="/post/:id" element={<PostDetails />} />
     </Routes>
   );
 }

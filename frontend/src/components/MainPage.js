@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PostsPage from './PostsPage';
-
+import Navbar from './Navbar';
 const MainPage = () => {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
@@ -17,7 +17,10 @@ const MainPage = () => {
       }, []);
     return (
     <div>
-        <h1 className='text-2xl'>Main Page</h1>
+        <Navbar />
+        <br></br>
+        <h1 className='text-3xl text-center'>All Posts</h1>
+        <br></br>
         <PostsPage posts={posts} />
     </div>
     )

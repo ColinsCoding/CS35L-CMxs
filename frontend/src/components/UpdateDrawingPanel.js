@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Row from './Row';
 import { exportComponentAsPNG, exportComponentAsJPEG } from 'react-component-export-image';
 import html2canvas from 'html2canvas';
@@ -8,10 +8,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/drawingPanel.css';
 
 
-// Used to create an entirely new post
-function DrawingPanel({ width, height, selectedColor }) {
+// Used to draw over another user's posts
+function UpdateDrawingPanel({ width, height, selectedColor }) {
+  const {id} = useParams();
   const navigate = useNavigate();
-  const createPost = (user, user_id, likes, image) => {
+  console.log(id);
+  const updatePost = (user, user_id, likes, image) => {
     const post_data = {
       user,
       user_id,
@@ -20,15 +22,16 @@ function DrawingPanel({ width, height, selectedColor }) {
     };
     console.log(post_data)
     axios
-    .post('http://localhost:5555/posts', post_data)
+    .put(`http://localhost:5555/posts/${id}`, post_data)
     .then(() => {
-      navigate('/feed');
+        navigate('/feed');
     })
     .catch((error) => {
       alert('Error')
       console.log(error);
     });
   };
+  
   const componentRef = useRef();
   
   
@@ -59,7 +62,7 @@ function DrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            createPost("johnsons", "placeholder_id", 0, data)
+            updatePost("update_user", "placeholder_id", 0, data)
           }}
       > POST TO WALL
       </button>
@@ -67,4 +70,4 @@ function DrawingPanel({ width, height, selectedColor }) {
   )
 }
 
-export default DrawingPanel;
+export default UpdateDrawingPanel;
