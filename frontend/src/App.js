@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Editor, Login, DrawingPanel } from "./components";
-import MainPage from './components/MainPage';
-import UserPage from "./components/UserPage";
-import UpdateEditor from "./components/UpdateEditor";
-import PostDetails from "./components/PostDetails";
-
+import {
+  Editor,
+  Login,
+  MainPage,
+  UserPage,
+  UpdateEditor,
+  PostDetails,
+} from "./components";
 
 function App() {
   return (
