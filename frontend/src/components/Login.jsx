@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { LoginInput } from "./";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaArrowLeft } from "react-icons/fa";
 import { LoginBg } from "../assets";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -13,18 +14,18 @@ const Login = () => {
   const signInWithEmailPass = async () => {};
 
   return (
-    <div>
-      <div
-        className="flex items-center justify-center h-screen relative overflow-hidden"
-        style={{ backgroundImage: `url(${LoginBg})` }}
-      >
-        {/*
-        <img
-          src={LoginBg}
-          className="w-full h-full object-cover absolute top-0 left-0"
-          alt=""
-        />
-        */}
+    <div
+      className="w-full h-screen bg-cover absolute top-0 left-0"
+      style={{ backgroundImage: `url(${LoginBg})` }}
+    >
+      {/*Return Button*/}
+      <NavLink to={"/"}>
+        <button className="">
+          <FaArrowLeft className="text-4xl" />
+        </button>
+      </NavLink>
+
+      <div className="flex items-center justify-center relative overflow-hidden">
         <div className="w-98 p-12 bg-slate-100 bg-opacity-90 shadow-md rounded-md mt-20">
           {/*content box*/}
           <h2 className="text-3xl text-center font-bold mb-4">
