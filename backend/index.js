@@ -16,6 +16,6 @@ mongoose.connect(mongoDBURL)
             console.log(`App is listening to port: ${PORT}`);
         });
     })
-    .catch(() => {
+    .catch((error) => {
         console.log(error)
     });
