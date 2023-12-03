@@ -34,15 +34,27 @@ router.post('/', async (request, response) => {
 //Incrememnt user's total likes
 router.post('/:id/like', async (request, response) => {
     try {
-        const post = await Post.findById(request.params.id);
+        const postId = request.params.id;
+        const userId = request.userId; 
+
+        // Check if the user has already liked the post
+        const user = await User.findById(userId);
+        if (user.likedPosts.includes(postId)) {
+            return response.status(400).json({ message: 'User has already liked this post' });
+        }
+
+        // Find the post and increment the likes
+        const post = await Post.findById(postId);
         if (!post) {
             return response.status(404).json({ message: 'Post not found' });
         }
-        post.likes += 1; // Increment the likes for the post
+        post.likes += 1;
         await post.save();
 
-        // Increment the totalLikes for the user who created the post
-        await User.findByIdAndUpdate(post.user_id, { $inc: { totalLikes: 1 } });
+        // Add the post to the user's likedPosts and increment totalLikes
+        user.likedPosts.push(postId);
+        user.totalLikes += 1; 
+        await user.save();
 
         response.status(200).json({ message: 'Post liked successfully', post });
     } catch (error) {
@@ -50,6 +62,7 @@ router.post('/:id/like', async (request, response) => {
         response.status(500).send({ message: error.message });
     }
 });
+
 
 // If unliking option is there
 router.post('/:id/unlike', async (request, response) => {
