@@ -6,22 +6,22 @@ const router = express.Router();
 router.post('/posts', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
-            (!request.body.likes && request.body.likes !== 0) ||
-            !request.body.image
+            !request.body.user_id || !request.body.image
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
             });
         }
         const newPost = {
-            user: request.body.user,
             user_id: request.body.user_id,
-            likes: request.body.likes,
+            likes: request.body.likes || 0, //default to 0 if not provided
             image: request.body.image,
         };
 
-        const post = await Post.create(newPost);
+        const post = await newPost.save();
+
+        //Linking the post with the user
+        await User.findByIdAndUpdate(request.body.user_id, { $push: { posts: post._id } });
 
         return response.status(201).send(post)
     } catch (error) {
@@ -29,6 +29,62 @@ router.post('/posts', async (request, response) => {
         response.status(500).send({ message: error.message });
     }
 });
+
+//Incrememnt user's total likes
+router.post('/:id/like', async (request, response) => {
+    try {
+        const postId = request.params.id;
+        const userId = request.userId; 
+
+        // Check if the user has already liked the post
+        const user = await User.findById(userId);
+        if (user.likedPosts.includes(postId)) {
+            return response.status(400).json({ message: 'User has already liked this post' });
+        }
+
+        // Find the post and increment the likes
+        const post = await Post.findById(postId);
+        if (!post) {
+            return response.status(404).json({ message: 'Post not found' });
+        }
+        post.likes += 1;
+        await post.save();
+
+        // Add the post to the user's likedPosts and increment totalLikes
+        user.likedPosts.push(postId);
+        user.totalLikes += 1; 
+        await user.save();
+
+        response.status(200).json({ message: 'Post liked successfully', post });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
+
+// If unliking option is there
+router.post('/:id/unlike', async (request, response) => {
+    try {
+        const post = await Post.findById(request.params.id);
+        if (!post) {
+            return response.status(404).json({ message: 'Post not found' });
+        }
+        if (post.likes > 0) {
+            post.likes -= 1; // Decrement the likes for the post
+            await post.save();
+
+            // Decrement the totalLikes for the user who created the post
+            await User.findByIdAndUpdate(post.user_id, { $inc: { totalLikes: -1 } });
+        }
+
+        response.status(200).json({ message: 'Post unliked successfully', post });
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message });
+    }
+});
+
 
 // Get all posts
 router.get('/posts', async (request, response) => {
@@ -64,9 +120,7 @@ router.get('/posts/:id', async (request, response) => {
 router.put('/posts/:id', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
-            (!request.body.likes && request.body.likes !== 0) ||
-            !request.body.image
+            !request.body.user_id || !request.body.image
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
@@ -75,7 +129,12 @@ router.put('/posts/:id', async (request, response) => {
 
         const { id } = request.params;
 
-        const result = await Post.findByIdAndUpdate(id, request.body);
+        //Updateing the post
+        const result = await Post.findByIdAndUpdate(id, {
+            user_id: request.body.user_id,
+            image: request.body.image,
+            likes: request.body.likes || 0, // Default to 0 if not provided
+        }, { new: true });
 
         if (!result) {
             return response.status(404).json({ message: 'Post not found' });

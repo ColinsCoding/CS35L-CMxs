@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 
 const postInfo = mongoose.Schema(
     {
-        user: {
-            type: String,
-            require: true,
-        },
+        // Removed 'user' field; we will use 'user_id' to reference the User model.
+        
         user_id: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId, // Changed type to ObjectId
+            ref: 'User', // Added a ref to 'User', indicating the model to use for population
             require: true,
         },
         likes: {
             type: Number,
+            default: 0, // Changed to have a default value of 0
             required: true,
         },
         image: {
