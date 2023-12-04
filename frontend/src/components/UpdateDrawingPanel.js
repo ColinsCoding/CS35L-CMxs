@@ -13,10 +13,9 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
   const {id} = useParams();
   const navigate = useNavigate();
   console.log(id);
-  const updatePost = (user, user_id, likes, image) => {
+  const updatePost = (user, likes, image) => {
     const post_data = {
       user,
-      user_id,
       likes,
       image
     };
@@ -62,7 +61,7 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            updatePost("update_user", "placeholder_id", 0, data)
+            updatePost("update_user", 0, data)
           }}
       > POST TO WALL
       </button>

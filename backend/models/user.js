@@ -6,7 +6,7 @@ const userInfo = mongoose.Schema(
             type: String,
             required: true,
         },
-        posts: [{
+        liked_posts: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Post', //should match the name given to the Post model
         }],

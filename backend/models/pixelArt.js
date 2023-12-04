@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const postInfo = mongoose.Schema(
     {
         // Removed 'user' field; we will use 'user_id' to reference the User model.
-        
+        user: {
+            type: String,
+            require: true,
+        },
         user_id: {
             type: mongoose.Schema.Types.ObjectId, // Changed type to ObjectId
             ref: 'User', // Added a ref to 'User', indicating the model to use for population

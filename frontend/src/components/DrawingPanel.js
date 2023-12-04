@@ -11,10 +11,9 @@ import '../styles/drawingPanel.css';
 // Used to create an entirely new post
 function DrawingPanel({ width, height, selectedColor }) {
   const navigate = useNavigate();
-  const createPost = (user, user_id, likes, image) => {
+  const createPost = (user, likes, image) => {
     const post_data = {
       user,
-      user_id,
       likes,
       image
     };
@@ -50,7 +49,7 @@ function DrawingPanel({ width, height, selectedColor }) {
       </button>
       <button 
         className='button-outline'
-       // onClick={() => exportComponentAsJPEG(componentRef)}
+          onClick={() => exportComponentAsJPEG(componentRef)}
       > Export as JPG
       </button>
       <button 
@@ -59,7 +58,7 @@ function DrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            createPost("johnsons", "placeholder_id", 0, data)
+            createPost("Jack", 0, data)
           }}
       > POST TO WALL
       </button>
