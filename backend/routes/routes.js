@@ -105,7 +105,7 @@ router.get('/posts/:id', async (request, response) => {
 router.put('/posts/:id', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
+            !request.body.user ||
             (!request.body.likes && request.body.likes !== 0) ||
             !request.body.image
         ) {
@@ -115,7 +115,11 @@ router.put('/posts/:id', async (request, response) => {
         }
 
         const { id } = request.params;
-
+        const post = await Post.findById(id);
+        // console.log(post)
+        const old_user = await User.findOne({username: post.user});
+        old_user.totalRemovals += 1;
+        await old_user.save();
         const result = await Post.findByIdAndUpdate(id, request.body);
 
         if (!result) {
@@ -164,8 +168,7 @@ router.post('/user', async (request, response) => {
     try {
         if (
             !request.body.username ||
-            !request.body.liked_posts ||
-            (!request.body.totalLikes && request.body.totalLikes !== 0)
+            !request.body.liked_posts
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
@@ -236,7 +239,8 @@ router.put('/user/:id', async (request, response) => {
         if (
             !request.body.username ||
             !request.body.liked_posts ||
-            (!request.body.totalLikes && request.body.totalLikes !== 0)
+            (!request.body.totalLikes && request.body.totalLikes !== 0) ||
+            (!request.body.totalRemovals && request.body.totalRemovals !== 0)
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
