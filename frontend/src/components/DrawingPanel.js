@@ -24,7 +24,7 @@ function DrawingPanel({ width, height, selectedColor }) {
       navigate('/feed');
     })
     .catch((error) => {
-      alert('Error')
+      alert('Could not post Drawing!')
       console.log(error);
     });
   };

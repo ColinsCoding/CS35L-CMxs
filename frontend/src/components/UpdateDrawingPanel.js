@@ -26,7 +26,7 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
         navigate('/feed');
     })
     .catch((error) => {
-      alert('Error')
+      alert('Could not update the drawing, post does not exist!')
       console.log(error);
     });
   };

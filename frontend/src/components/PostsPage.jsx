@@ -11,7 +11,7 @@ const PostsPage = ({ posts }) => {
         .then((response) => {
           setLikedPosts(response.data.liked_posts);
         }).catch((error) => {
-          alert("Error")
+          alert("Could not get user data")
           console.log(error)
         });
       }, []);
