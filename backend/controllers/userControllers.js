@@ -1,9 +1,9 @@
 // backend/controllers/userControllers.js
 
-const User = require('../models/user');
-const bcrypt = require('bcryptjs');
+import { User } from "../models/user.js"
+import bcrypt from 'bcryptjs'
 
-module.exports = {
+const UserControllers = {
   async register(req, res) {
     try {
       const { username, email, password } = req.body;
@@ -61,3 +61,4 @@ module.exports = {
   }
 };
 
+export default UserControllers;
