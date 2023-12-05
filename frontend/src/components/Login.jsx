@@ -19,7 +19,7 @@ const Login = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/routes/users/register', {
+      const response = await fetch('http://localhost:5555/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/routes/users/login', {
+      const response = await fetch('http://localhost:5555/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
