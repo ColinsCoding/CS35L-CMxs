@@ -1,3 +1,5 @@
+// // frontend/src/components/DrawingPanel.js
+
 import React, { useRef } from 'react';
 import Row from './Row';
 import { exportComponentAsPNG, exportComponentAsJPEG } from 'react-component-export-image';

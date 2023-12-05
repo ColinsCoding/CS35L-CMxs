@@ -5,10 +5,21 @@ const userInfo = mongoose.Schema(
         username: {
             type: String,
             required: true,
+            unique: true,
+        },
+        email: {
+          type: String,
+          required: true,
+          unique: true
+        },
+        password: {
+          type: String,
+          required: true
         },
         liked_posts: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Post', //should match the name given to the Post model
+            default: [],
         }],
         totalLikes: {
             type: Number,

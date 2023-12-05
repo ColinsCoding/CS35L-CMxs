@@ -1,3 +1,5 @@
+// frontend/src/components/Editor.js
+
 import React, { useState } from 'react';
 import { CirclePicker } from 'react-color';
 import DrawingPanel from './DrawingPanel';
@@ -11,7 +13,6 @@ function Editor() {
   const [canvasHeight, setCanvasHeight] = useState(16);
   const [hideOptions, setHideOptions] = useState(false);
   const [hideDrawingCanvas, setHideDrawingCanvas] = useState(true);
-  //const [buttonText, setButtonText] = useState('Start drawing');
   const [selectedColor, setSelectedColor] = useState('#f44336');
 
   const widthHandler = (e) => {
