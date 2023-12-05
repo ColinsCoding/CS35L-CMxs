@@ -1,3 +1,5 @@
+//backend/models/pixelArt.js
+
 import mongoose from "mongoose";
 
 const postInfo = mongoose.Schema(
