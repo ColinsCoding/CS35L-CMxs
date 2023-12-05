@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the backend directory, you can run:
 
-### `npm run dev`
+### `node index.js`
 
 Starts up the database in [http://localhost:5555](http://localhost:5555).\
 Enter personal database details in `/backend/config.js`
