@@ -11,12 +11,6 @@ In the backend directory, you can run:
 Starts up the database in [http://localhost:5555](http://localhost:5555).\
 Enter personal database details in `/backend/config.js`
 
-In the frontend directory, you can run:
-
-### `node index.js`
-Run this once you are cd'd into backend, this will start the backend and the mongo server.
-Then you can cd to the front end and then run:
-
 ### `npm start`
 Runs the front endapp in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
