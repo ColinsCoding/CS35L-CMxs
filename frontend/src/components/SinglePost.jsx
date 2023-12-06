@@ -10,8 +10,14 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const SinglePost = ({ post, likedPosts}) => {
     const { user } = useAuthContext();
     const [likes, setLikes] = useState(post.likes);
+    const navigate = useNavigate();
     const [postInLikes, setPostInLikes] = useState(likedPosts.includes(post._id));
     const handleLike = () => {
+      if (!user) {
+        alert('Please login to like a post');
+        navigate('/login');
+        return;
+      }
       axios
       .post(`http://localhost:5555/like/${post._id}/${user.username}`) // replace with username
       .then(() => {

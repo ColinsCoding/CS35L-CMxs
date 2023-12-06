@@ -14,6 +14,10 @@ function DrawingPanel({ width, height, selectedColor }) {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const createPost = (user_x, likes, image) => {
+    if (!user) {
+      alert('You must be logged in to create a post!');
+      return;
+    }
     const post_data = {
       user: user_x,
       likes,
