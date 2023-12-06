@@ -17,6 +17,15 @@ export default function Navbar() {
   const handleLogout = () => {
     logout()
   }
+  const handleProfile = () => {
+    if (!user) {
+      alert("You must be logged in to view the profile.");
+      navigate('/login');
+      return;
+    }
+    navigate(`/user/${user.username}`);
+  }
+
   var username = "";
   if (user != null){
     username = user.username;

@@ -11,7 +11,17 @@ const SinglePost = ({ post, likedPosts}) => {
     const { user } = useAuthContext();
     const [likes, setLikes] = useState(post.likes);
     const navigate = useNavigate();
+    const history = useHistory();
     const [postInLikes, setPostInLikes] = useState(likedPosts.includes(post._id));
+    
+    const handleEdit = () => {
+      if (!user) {
+          alert("You must be logged in to edit a post.");
+          history.push('/login');
+          return;
+      }
+      history.push(`/edit/${post._id}`);
+    }
     const handleLike = () => {
       if (!user) {
         alert('Please login to like a post');
