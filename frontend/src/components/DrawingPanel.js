@@ -14,10 +14,6 @@ function DrawingPanel({ width, height, selectedColor }) {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const createPost = (user_x, likes, image) => {
-    if (!user) {
-      alert('You must be logged in to create a post!');
-      return;
-    }
     const post_data = {
       user: user_x,
       likes,
@@ -64,7 +60,13 @@ function DrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            createPost(user.username, 0, data)
+            if (user){
+              createPost(user.username, 0, data);
+            }
+            else {
+              alert('You must be logged in to create a post!');
+              return;
+            }
           }}
       > POST TO WALL
       </button>

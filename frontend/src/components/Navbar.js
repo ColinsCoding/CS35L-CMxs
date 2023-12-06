@@ -12,6 +12,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const { user } = useAuthContext();
   const { logout } = useLogout();
   const handleLogout = () => {
@@ -32,7 +33,6 @@ export default function Navbar() {
   }
   const navigation = [
     { name: "Canvas", href: "/", current: false },
-    { name: "Profile", href: `/user/${username}`, current: false },
     { name: "Posts", href: "/feed", current: false },
   ];
   return (
@@ -73,7 +73,16 @@ export default function Navbar() {
                       >
                         {item.name}
                       </a>
+            
                     ))}
+                      <a
+                        key={"Profile"}
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        onClick={handleProfile}
+                        aria-current={undefined}
+                      >
+                        Profile
+                      </a>
                   </div>
                 </div>
               </div>

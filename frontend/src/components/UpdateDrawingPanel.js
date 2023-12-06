@@ -63,7 +63,13 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            updatePost(user.username, 0, data)
+            if (user){
+              updatePost(user.username, 0, data);
+            }
+            else {
+              alert('You must be logged in to edit a post!');
+              return;
+            }
           }}
       > POST TO WALL
       </button>
