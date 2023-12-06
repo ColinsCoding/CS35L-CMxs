@@ -1,3 +1,5 @@
+// frontend/src/components/LoginInput.jsx
+
 import React, { useState } from "react";
 
 const LoginInput = ({

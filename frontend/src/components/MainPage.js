@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PostsPage from './PostsPage';
 import Navbar from './Navbar';
-const MainPage = () => {
+function MainPage () {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
         axios

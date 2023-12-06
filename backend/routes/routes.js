@@ -1,8 +1,20 @@
+// backend/routes/routes.js
+
 import express from 'express';
 import { Post } from '../models/pixelArt.js';
 import { User } from '../models/user.js';
+import bcrypt from 'bcryptjs'; // Import bcrypt
+import jwt from "jsonwebtoken"
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const router = express.Router();
+
+export const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET_TOKEN, {expiresIn: '3d'})
+}
+
 
 router.post('/posts', async (request, response) => {
     try {
@@ -115,11 +127,13 @@ router.put('/posts/:id', async (request, response) => {
         }
 
         const { id } = request.params;
+
         const post = await Post.findById(id);
-        // console.log(post)
+
         const old_user = await User.findOne({username: post.user});
         old_user.totalRemovals += 1;
         await old_user.save();
+
         const result = await Post.findByIdAndUpdate(id, request.body);
 
         if (!result) {
@@ -280,4 +294,69 @@ router.delete('/user/:id', async (request, response) => {
     }
 });
 
-export default router;
+// Authentication routes from Project 2's `auth.js` file
+// Integrate these routes with Project 2's controllers
+router.post('/users/register', async (req, res) => {
+    try {
+      const { username, email, password } = req.body;
+  
+      // Check if user already exists
+      const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+      if (existingUser) {
+        if (existingUser.email === email) {
+          return res.status(400).json({ message: 'Email already exists' });
+        } else {
+          return res.status(400).json({ message: 'Username already exists' });
+        }
+      }
+  
+      // Create new user
+      const newUser = new User({
+        username,
+        email,
+        password
+      });
+  
+      // Hash password before saving to database
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(newUser.password, salt);
+      newUser.password = hash;
+  
+      await newUser.save();
+
+      //token
+      const token = createToken(newUser._id);
+      res.json({email, username, token}); // Respond with the newly created user message
+      // res.json({ message: 'Sign up successful' });
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+  
+  router.post('/users/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      // Find user by email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Check password
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        const username = user.username;
+        // Successful login
+        const token = createToken(user._id);
+        res.json({email, username, token}); 
+        // res.json({ message: 'Login successful' });
+      } else {
+        return res.status(400).json({ message: 'Invalid password' });
+      }
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+  
+  export default router;

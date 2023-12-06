@@ -1,17 +1,34 @@
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiPencil } from "react-icons/bi";
 import { FaRegHeart, FaHeart  } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const SinglePost = ({ post, likedPosts}) => {
+    const { user } = useAuthContext();
     const [likes, setLikes] = useState(post.likes);
+    const navigate = useNavigate();
     const [postInLikes, setPostInLikes] = useState(likedPosts.includes(post._id));
+    
+    const handleEdit = () => {
+      if (!user) {
+          alert("You must be logged in to edit a post.");
+          navigate('/login');
+          return;
+      }
+      navigate(`/edit/${post._id}`);
+    }
     const handleLike = () => {
+      if (!user) {
+        alert('Please login to like a post');
+        navigate('/login');
+        return;
+      }
       axios
-      .post(`http://localhost:5555/like/${post._id}/Marco`) // replace with username
+      .post(`http://localhost:5555/like/${post._id}/${user.username}`) // replace with username
       .then(() => {
         if (!postInLikes){
           setLikes(likes+1);
@@ -47,11 +64,9 @@ const SinglePost = ({ post, likedPosts}) => {
         ):(
           <FaRegHeart className='text-2xl text-red-700 hover:text-black' onClick={handleLike}/>
         )}
-        <Link to={`/edit/${post._id}`}>
           <BiPencil
-            className='text-3xl text-yellow-300 hover:text-black'
+            className='text-3xl text-yellow-300 hover:text-black' onClick={handleEdit}
           />
-        </Link>
       </div>
       {/* <h4 className='my-2 text-gray-500 text-left'>{new Date(post.updatedAt).toString()}</h4> */}
     </div>

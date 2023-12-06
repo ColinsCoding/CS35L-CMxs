@@ -18,23 +18,22 @@ const UserPage = () => {
             console.log(error);
           });
       }, []);
-    useEffect(() => {
-      axios
-        .get(`http://localhost:5555/username/${user}`)
-        .then((response) => {
-          setUserData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
-    if (userData.totalRemovals == 0){
-      rep = userData.totalLikes;
-    }
-    else {
-      rep = (userData.totalLikes / userData.totalRemovals)
-    }
-    
+      useEffect(() => {
+        axios
+          .get(`http://localhost:5555/username/${user}`)
+          .then((response) => {
+            setUserData(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
+      if (userData.totalRemovals == 0){
+        rep = userData.totalLikes;
+      }
+      else {
+        rep = (userData.totalLikes / userData.totalRemovals)
+      }
     return (
     <div>
       <Navbar />
