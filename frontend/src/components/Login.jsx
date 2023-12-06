@@ -5,6 +5,8 @@ import { LoginInput } from "./";
 import { FaEnvelope, FaLock, FaArrowLeft } from "react-icons/fa";
 import { LoginBg } from "../assets";
 import { NavLink } from "react-router-dom";
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -15,6 +17,8 @@ const Login = () => {
   const [signupMessage, setSignupMessage] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -31,10 +35,13 @@ const Login = () => {
       console.log(data);
   
       if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data))
+        dispatch({type: "LOGIN", payload: data})
         setSignupMessage('Sign up successful');
         setTimeout(() => {
           setSignupMessage('');
         }, 10000);
+        navigate("/");
       } else {
         setSignupMessage(data.message || 'Sign up failed');
         setTimeout(() => {
@@ -65,10 +72,13 @@ const Login = () => {
       console.log(data);
       
       if (response.ok) {
+        localStorage.setItem('user', JSON.stringify(data))
+        dispatch({type: "LOGIN", payload: data})
         setLoginMessage(data.message || 'Login successful');
         setTimeout(() => {
           setLoginMessage('');
         }, 10000);
+        navigate("/");
       } else {
         setLoginMessage(data.message || 'Login failed');
         setTimeout(() => {

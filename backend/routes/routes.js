@@ -4,8 +4,17 @@ import express from 'express';
 import { Post } from '../models/pixelArt.js';
 import { User } from '../models/user.js';
 import bcrypt from 'bcryptjs'; // Import bcrypt
+import jwt from "jsonwebtoken"
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const router = express.Router();
+
+export const createToken = (_id) => {
+  return jwt.sign({_id}, process.env.SECRET_TOKEN, {expiresIn: '3d'})
+}
+
 
 router.post('/posts', async (request, response) => {
     try {
@@ -108,7 +117,7 @@ router.get('/posts/:id', async (request, response) => {
 router.put('/posts/:id', async (request, response) => {
     try {
         if (
-            !request.body.user || !request.body.user_id ||
+            !request.body.user ||
             (!request.body.likes && request.body.likes !== 0) ||
             !request.body.image
         ) {
@@ -118,6 +127,12 @@ router.put('/posts/:id', async (request, response) => {
         }
 
         const { id } = request.params;
+
+        const post = await Post.findById(id);
+
+        const old_user = await User.findOne({username: post.user});
+        old_user.totalRemovals += 1;
+        await old_user.save();
 
         const result = await Post.findByIdAndUpdate(id, request.body);
 
@@ -167,8 +182,7 @@ router.post('/user', async (request, response) => {
     try {
         if (
             !request.body.username ||
-            !request.body.liked_posts ||
-            (!request.body.totalLikes && request.body.totalLikes !== 0)
+            !request.body.liked_posts
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
@@ -239,7 +253,8 @@ router.put('/user/:id', async (request, response) => {
         if (
             !request.body.username ||
             !request.body.liked_posts ||
-            (!request.body.totalLikes && request.body.totalLikes !== 0)
+            (!request.body.totalLikes && request.body.totalLikes !== 0) ||
+            (!request.body.totalRemovals && request.body.totalRemovals !== 0)
         ) {
             return response.status(400).send({
                 message: 'Must send all fields',
@@ -308,7 +323,11 @@ router.post('/users/register', async (req, res) => {
       newUser.password = hash;
   
       await newUser.save();
-      res.json({ message: 'Sign up successful' }); // Respond with the newly created user message
+
+      //token
+      const token = createToken(newUser._id);
+      res.json({email, username, token}); // Respond with the newly created user message
+      // res.json({ message: 'Sign up successful' });
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
@@ -327,8 +346,11 @@ router.post('/users/register', async (req, res) => {
       // Check password
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
+        const username = user.username;
         // Successful login
-        res.json({ message: 'Login successful' });
+        const token = createToken(user._id);
+        res.json({email, username, token}); 
+        // res.json({ message: 'Login successful' });
       } else {
         return res.status(400).json({ message: 'Invalid password' });
       }

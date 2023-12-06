@@ -26,6 +26,10 @@ const userInfo = mongoose.Schema(
             type: Number,
             default: 0, // Default to 0 and will increment with each like on user's posts
         },
+        totalRemovals: {
+            type: Number,
+            default: 0, // Default to 0 and will increment with each removal of user's posts
+        }
     },
     {
         timestamps: true,

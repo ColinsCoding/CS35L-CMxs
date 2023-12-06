@@ -3,18 +3,29 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaPaintBrush } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { Logout, useLogout } from "../hooks/Logout"
+import { useAuthContext } from "../hooks/useAuthContext";
 
-const navigation = [
-  { name: "Canvas", href: "/", current: false },
-  { name: "Profile", href: "/user/placeholder_user", current: false },
-  { name: "Posts", href: "/feed", current: false },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const { user } = useAuthContext();
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout()
+  }
+  var username = "";
+  if (user != null){
+    username = user.username;
+  }
+  const navigation = [
+    { name: "Canvas", href: "/", current: false },
+    { name: "Profile", href: `/user/${username}`, current: false },
+    { name: "Posts", href: "/feed", current: false },
+  ];
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -58,11 +69,17 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              {user == null ? (
                 <NavLink to={"/login"}>
-                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                    Sign In
-                  </button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                  Sign In
+                </button>
                 </NavLink>
+              ):(
+                <NavLink to={"/"}>
+                  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" onClick={handleLogout}>Logout</button>
+                </NavLink>
+              )}
               </div>
             </div>
           </div>

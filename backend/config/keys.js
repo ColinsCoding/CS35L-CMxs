@@ -1,5 +1,9 @@
 // backend/config/keys.js
+import dotenv from 'dotenv'
+
+dotenv.config();
+
 
 export const PORT = 5555;
 
-export const mongoDBURL = 'mongodb+srv://user0:user0@cluster0.texb5ag.mongodb.net/?retryWrites=true&w=majority'
+export const mongoDBURL = process.env.MONGODB_URL;

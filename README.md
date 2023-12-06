@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Enviornmental Variables
+
+Before running the program, create a file named ".env" with the following format in the `/backend` directory:
+```
+SECRET_TOKEN= {Your own secret string for generating tokens}
+MONGODB_URL= {Your MongoDB URL}
+```
+
 ## Available Scripts
 
 In the backend directory, you can run:

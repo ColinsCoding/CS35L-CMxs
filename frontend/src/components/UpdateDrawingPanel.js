@@ -4,18 +4,20 @@ import { exportComponentAsPNG, exportComponentAsJPEG } from 'react-component-exp
 import html2canvas from 'html2canvas';
 import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 import '../styles/drawingPanel.css';
 
 
 // Used to draw over another user's posts
 function UpdateDrawingPanel({ width, height, selectedColor }) {
+  const { user } = useAuthContext();
   const {id} = useParams();
   const navigate = useNavigate();
   console.log(id);
-  const updatePost = (user, likes, image) => {
+  const updatePost = (user_x, likes, image) => {
     const post_data = {
-      user,
+      user: user_x,
       likes,
       image
     };
@@ -61,7 +63,7 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
             const element  = componentRef.current;
             const canvas = await html2canvas(element);
             const data = canvas.toDataURL('image/png');
-            updatePost("update_user", 0, data)
+            updatePost(user.username, 0, data)
           }}
       > POST TO WALL
       </button>

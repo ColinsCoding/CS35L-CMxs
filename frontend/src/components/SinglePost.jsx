@@ -5,13 +5,15 @@ import { FaRegHeart, FaHeart  } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const SinglePost = ({ post, likedPosts}) => {
+    const { user } = useAuthContext();
     const [likes, setLikes] = useState(post.likes);
     const [postInLikes, setPostInLikes] = useState(likedPosts.includes(post._id));
     const handleLike = () => {
       axios
-      .post(`http://localhost:5555/like/${post._id}/Marco`) // replace with username
+      .post(`http://localhost:5555/like/${post._id}/${user.username}`) // replace with username
       .then(() => {
         if (!postInLikes){
           setLikes(likes+1);

@@ -3,12 +3,14 @@
 import User from '../models/user.js';
 import bcrypt from 'bcryptjs';
 
+
 export const register = async (req, res) => {
     try {
       const { username, email, password } = req.body;
   
       // Check if user already exists
       const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+
       if (existingUser) {
         if (existingUser.email === email) {
           return res.status(400).json({ message: 'Email already exists' });
@@ -30,7 +32,8 @@ export const register = async (req, res) => {
       newUser.password = hash;
   
       await newUser.save();
-      res.json(newUser); // Respond with the newly created user
+
+      res.status(200).json({username, email, token}); // Respond with the newly created user
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
