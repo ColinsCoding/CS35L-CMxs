@@ -6,6 +6,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useHistory } from 'react-router-dom';
 
 const SinglePost = ({ post, likedPosts}) => {
     const { user } = useAuthContext();

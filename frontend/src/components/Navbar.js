@@ -5,7 +5,7 @@ import { FaPaintBrush } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { Logout, useLogout } from "../hooks/Logout"
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { useNavigate } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
