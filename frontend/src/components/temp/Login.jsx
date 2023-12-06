@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { LoginInput } from "./";
+import { LoginInput } from "..";
 import { FaEnvelope, FaLock, FaArrowLeft } from "react-icons/fa";
-import { LoginBg } from "../assets";
+import { LoginBg } from "../../assets";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {

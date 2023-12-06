@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const navigation = [
   { name: "Canvas", href: "/", current: false },
-  { name: "Profile", href: "/user/placeholder_user", current: false },
+  { name: "Profile", href: "/user/Jack", current: false },
   { name: "Posts", href: "/feed", current: false },
 ];
 
