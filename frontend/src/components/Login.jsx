@@ -1,7 +1,7 @@
 // frontend/src/components/Login.jsx
 
 import React, { useState } from "react";
-import { LoginInput } from "./";
+import { LoginInput } from "./LoginInput.jsx";
 import { FaEnvelope, FaLock, FaArrowLeft } from "react-icons/fa";
 import { LoginBg } from "../assets";
 import { NavLink } from "react-router-dom";
