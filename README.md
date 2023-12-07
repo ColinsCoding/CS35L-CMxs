@@ -10,6 +10,11 @@ SECRET_TOKEN= {Your own secret string for generating tokens}
 MONGODB_URL= {Your MongoDB URL}
 ```
 
+## Install Modules
+
+Please run: `npm install` in both the `/backend` and `/frontend` directories.\
+This will install all needed modules.
+
 ## Available Scripts
 
 In the backend directory, you can run:
@@ -25,6 +30,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Sources Used
+
+1. Carnes B. MERN Stack Crash Course – Build a Book Store App [Internet]. freeCodeCamp.org. 2023 [cited 2023 Dec 7]. Available from: [https://www.freecodecamp.org/news/mern-stack-crash-course/](https://www.freecodecamp.org/news/mern-stack-crash-course/)
+
+2. Ninja N. MERN Auth Tutorial - YouTube [Internet]. www.youtube.com. 2022. Available from: [https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
+
+3. Navbars - Official Tailwind CSS UI Components [Internet]. www.tailwindui.com. [cited 2023 Dec 7]. Available from: [https://tailwindui.com/components/application-ui/navigation/navbars](https://tailwindui.com/components/application-ui/navigation/navbars)
 
 ---
 
