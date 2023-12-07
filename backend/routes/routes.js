@@ -134,6 +134,12 @@ router.put('/posts/:id', async (request, response) => {
         old_user.totalRemovals += 1;
         await old_user.save();
 
+        const liked_users = await User.find({liked_posts: { $in: post._id}})
+        for (let i = 0; i < liked_users.length; i++) {
+            liked_users[i].liked_posts.splice(liked_users[i].liked_posts.indexOf(post._id), 1);
+            await liked_users[i].save();
+        }
+
         const result = await Post.findByIdAndUpdate(id, request.body);
 
         if (!result) {
