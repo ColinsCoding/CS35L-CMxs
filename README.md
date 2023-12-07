@@ -32,7 +32,9 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## Sources Used
+5. React JS - React Tutorial for Beginners. YouTube. 2022. Available from: [https://www.youtube.com/watch?v=IAD68la3An8](https://www.youtube.com/watch?v=IAD68la3An8)
 
+6. Popovic, Aleksandar. "How to build a Pixel Art Drawing App in React." aleksandarpopovic.com. Available from: [https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/](https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/)
 1. Carnes B. MERN Stack Crash Course – Build a Book Store App [Internet]. freeCodeCamp.org. 2023 [cited 2023 Dec 7]. Available from: [https://www.freecodecamp.org/news/mern-stack-crash-course/](https://www.freecodecamp.org/news/mern-stack-crash-course/)
 
 2. Ninja N. MERN Auth Tutorial - YouTube [Internet]. www.youtube.com. 2022. Available from: [https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT](https://www.youtube.com/playlist?list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT)
@@ -43,6 +45,10 @@ You may also see any lint errors in the console.
   "User Authentication in Node.js." MakeUseOf. Available at: https://www.makeuseof.com/user-authentication-in-nodejs/ <br>
   "Node.js Authentication using Passport.js and Passport-Local Mongoose." GeeksforGeeks. Available at: https://www.geeksforgeeks.org/node-js-authentication-using-passportjs-and-passport-local-mongoose/ <br>
   Express-MongoDB-Authentication Repository. LintangWisesa. GitHub. Available at: https://github.com/LintangWisesa/Express-MongoDB-Authentication/tree/master <br>
+
+5. React JS - React Tutorial for Beginners. YouTube. 2022. Available from: [https://www.youtube.com/watch?v=IAD68la3An8](https://www.youtube.com/watch?v=IAD68la3An8)
+
+6. Popovic, Aleksandar. "How to build a Pixel Art Drawing App in React." aleksandarpopovic.com. Available from: [https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/](https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/)
 
 ---
 
