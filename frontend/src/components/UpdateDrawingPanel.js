@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Row from './Row';
-import { exportComponentAsPNG, exportComponentAsJPEG } from 'react-component-export-image';
+import { exportComponentAsJPEG } from 'react-component-export-image';
 import html2canvas from 'html2canvas';
 import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom';
@@ -49,12 +49,7 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
       </div>
       <button 
         className='button-outline'
-          onClick={() => exportComponentAsPNG(componentRef)}
-      > Export as PNG
-      </button>
-      <button 
-        className='button-outline'
-       // onClick={() => exportComponentAsJPEG(componentRef)}
+       onClick={() => exportComponentAsJPEG(componentRef)}
       > Export as JPG
       </button>
       <button 
