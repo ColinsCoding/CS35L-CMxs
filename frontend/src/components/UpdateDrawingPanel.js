@@ -28,7 +28,7 @@ function UpdateDrawingPanel({ width, height, selectedColor }) {
         navigate('/feed');
     })
     .catch((error) => {
-      alert('Error')
+      alert('Could npt update the drawing, post may not exist!')
       console.log(error);
     });
   };

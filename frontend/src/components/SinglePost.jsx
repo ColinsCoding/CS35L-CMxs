@@ -38,7 +38,7 @@ const SinglePost = ({ post, likedPosts}) => {
         }
       })
       .catch((error) => {
-        alert('Error')
+        alert('Could not edit like on post!')
         console.log(error);
       });
       setPostInLikes(!postInLikes);
