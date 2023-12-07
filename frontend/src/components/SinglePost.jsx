@@ -88,7 +88,7 @@ const SinglePost = ({ post, likedPosts}) => {
           <BiPencil
             className='text-3xl text-yellow-300 hover:text-black' onClick={handleEdit}
           />
-          {(window.location.pathname === `/user/${user.username}`) 
+          {(user && (window.location.pathname === `/user/${user.username}`)) 
           && <FaTrash className='text-2xl text-gray-400 hover:text-black' onClick={handleDelete}
           />}
       </div>
