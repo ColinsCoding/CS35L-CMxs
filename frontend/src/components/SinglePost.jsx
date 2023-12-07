@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { BiPencil } from "react-icons/bi";
-import { FaRegHeart, FaHeart  } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaTrash } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { useState } from 'react';
@@ -43,6 +43,27 @@ const SinglePost = ({ post, likedPosts}) => {
       });
       setPostInLikes(!postInLikes);
     };
+    const handleDelete = async () => {
+      if (!user) {
+        alert("You must be logged in to access this feature");
+        navigate('/login');
+        return;
+      }
+      if(post.user != user.username) {
+        alert('You may only delete your own posts!');
+        return;
+      }
+      axios
+      .delete(`http://localhost:5555/posts/${post._id}`)
+      .then((response) => {
+        console.log('Post deleted successfully');
+        //Reload page
+        window.location.reload(false);
+      })  
+      .catch ((error) => {
+        console.error('Error deleting post:', error.message);
+      });
+    };
     return (
     <div className='border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'>
       <div className='flex justify-between'>
@@ -67,6 +88,9 @@ const SinglePost = ({ post, likedPosts}) => {
           <BiPencil
             className='text-3xl text-yellow-300 hover:text-black' onClick={handleEdit}
           />
+          {(window.location.pathname === `/user/${user.username}`) 
+          && <FaTrash className='text-2xl text-gray-400 hover:text-black' onClick={handleDelete}
+          />}
       </div>
       {/* <h4 className='my-2 text-gray-500 text-left'>{new Date(post.updatedAt).toString()}</h4> */}
     </div>
