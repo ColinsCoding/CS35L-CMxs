@@ -44,6 +44,10 @@ You may also see any lint errors in the console.
   "Node.js Authentication using Passport.js and Passport-Local Mongoose." GeeksforGeeks. Available at: https://www.geeksforgeeks.org/node-js-authentication-using-passportjs-and-passport-local-mongoose/ <br>
   Express-MongoDB-Authentication Repository. LintangWisesa. GitHub. Available at: https://github.com/LintangWisesa/Express-MongoDB-Authentication/tree/master <br>
 
+5. React JS - React Tutorial for Beginners. YouTube. 2022. Available from: [https://www.youtube.com/watch?v=IAD68la3An8](https://www.youtube.com/watch?v=IAD68la3An8)
+
+6. Popovic, Aleksandar. "How to build a Pixel Art Drawing App in React." aleksandarpopovic.com. Available from: [https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/](https://aleksandarpopovic.com/How-to-build-a-Pixel-Art-Drawing-App-in-React/)
+
 ---
 
 ### `npm test`
