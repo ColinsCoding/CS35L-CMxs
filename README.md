@@ -39,10 +39,10 @@ You may also see any lint errors in the console.
 
 3. Navbars - Official Tailwind CSS UI Components [Internet]. www.tailwindui.com. [cited 2023 Dec 7]. Available from: [https://tailwindui.com/components/application-ui/navigation/navbars](https://tailwindui.com/components/application-ui/navigation/navbars)
 
-4. User login & Authentication:
-  "User Authentication in Node.js." MakeUseOf. Available at: https://www.makeuseof.com/user-authentication-in-nodejs/
-  "Node.js Authentication using Passport.js and Passport-Local Mongoose." GeeksforGeeks. Available at: https://www.geeksforgeeks.org/node-js-authentication-using-passportjs-and-passport-local-mongoose/
-  Express-MongoDB-Authentication Repository. LintangWisesa. GitHub. Available at: https://github.com/LintangWisesa/Express-MongoDB-Authentication/tree/master
+4. User login & Authentication: <br>
+  "User Authentication in Node.js." MakeUseOf. Available at: https://www.makeuseof.com/user-authentication-in-nodejs/ <br>
+  "Node.js Authentication using Passport.js and Passport-Local Mongoose." GeeksforGeeks. Available at: https://www.geeksforgeeks.org/node-js-authentication-using-passportjs-and-passport-local-mongoose/ <br>
+  Express-MongoDB-Authentication Repository. LintangWisesa. GitHub. Available at: https://github.com/LintangWisesa/Express-MongoDB-Authentication/tree/master <br>
 
 ---
 
