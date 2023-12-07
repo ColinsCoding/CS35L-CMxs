@@ -46,11 +46,7 @@ function DrawingPanel({ width, height, selectedColor }) {
       <div id="pixels" ref={componentRef}>
         {rows}
       </div>
-      <button 
-        className='button-outline'
-          onClick={() => exportComponentAsPNG(componentRef)}
-      > Export as PNG
-      </button>
+
       <button 
         className='button-outline'
           onClick={() => exportComponentAsJPEG(componentRef)}
