@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# 8-Bit Graffiti Wall
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A social media game where users can paint or remove posts. These posts are "pixel art", and are simple images that users can easily create.
+Painting allows for 8-bit image creation on the wall while removing paints over someone else’s drawing. 
+
+## Features
+- Users can create a post, which is placed on the wall
+- Users can like and unlike posts by other users and themselves
+- Users can share posts
+  - There exists an information page for each post, containing its details 
+  - Link to information page can be shared for any user to view the post
+- Users have accumulated statistics which can be viewed on their profile pages
+- Users must register for an account before creating, editing, or liking posts
+  - Unique username and email, along with a password
+  - Password is hashed before being stored to ensure security
+
 
 ## Enviornmental Variables
 
@@ -103,3 +116,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
